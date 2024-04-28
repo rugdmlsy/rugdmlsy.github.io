@@ -7,8 +7,10 @@ title: Hexo
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
-language: en
+author: Yuchen Xue
+language: 
+- zh-CN
+- en
 timezone: ''
 
 # URL
