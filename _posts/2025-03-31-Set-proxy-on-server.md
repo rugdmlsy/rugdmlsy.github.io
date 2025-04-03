@@ -12,10 +12,11 @@ tags: [linux, server, proxy, clash]
 wget https://github.com/DustinWin/proxy-tools/releases/download/Clash-Premium/clashpremium-nightly-linux-amd64-v3.tar.gz
 
 # 解压
+mkdir ~/clash
 tar -xzvf clashpremium-nightly-linux-amd64-v3.tar.gz -C ~/clash
 
 # 重命名
-mv ~/clash/clashpremium-nightly-linux-amd64-v3.tar.gz ～/clash/clash
+mv ~/clash/CrashCore ~/clash/clash
 
 # 添加可执行权限
 chmod +x ~/clash/clash
@@ -43,6 +44,7 @@ cd ~/clash
 ```sh
 alias clash='~/clash/clash -d ~/clash &'
 ```
+{:  file="~/.bashrc"}
 ## 2. 环境配置
 需要在命令行中使用代理时，需设置环境参数：
 ```sh
@@ -79,6 +81,7 @@ fi
 ```
 alias toggleproxy="source ~/Scripts/toggle_proxy.sh"
 ```
+{:  file="~/.bashrc"}
 之后，只需要使用 `toggleproxy` 命令即可自动设置代理了：
 ```sh
 root@ubuntu:~$ toggleproxy 
@@ -87,6 +90,14 @@ root@ubuntu:~$ toggleproxy
 Proxy disabled
 ```
 > 注意，设置 alias 时使用 `source ~/Scripts/toggle_proxy.sh` 而非 `~/Scripts/toggle_proxy.sh`，因为 sh 脚本运行在一个**子终端**，其进行的环境配置不影响父终端，因此会出现代理配置无效的情况
+{:  .prompt-warning}
+
+检验是否设置成功：
+```sh
+curl google.com
+```
+> `ping` 默认不使用 `http_proxy` 参数，所以不要用 `ping` 检验设置结果。
+{:  .prompt-tip}
 
 有一些软件如 git 不使用 HTTP_PROXY 参数作为代理，此时需要手动配置：
 ```sh
@@ -117,5 +128,8 @@ fi
 ```
 ```sh
 chmod +x ~/Scripts/git_proxy.sh
+```
+```
 alias gitproxy='~/Scripts/git_proxy.sh'
 ```
+{:  file="~/.bashrc"}
